@@ -356,7 +356,8 @@ def run(
                            stderr=subprocess.STDOUT, universal_newlines=True,
                            check=True)
         elif verbose == "q":
-            check_call(cmd, stdout=subprocess.DEVNULL)
+            subprocess.run(cmd, stdout=subprocess.DEVNULL,
+                           stderr=subprocess.PIPE,check=True)
     except CalledProcessError as ex:
         message = parse_error(ex.output, output_dir)
         raise EnergyPlusRunError(message)
